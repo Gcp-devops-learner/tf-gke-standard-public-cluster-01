@@ -25,23 +25,10 @@ module "gke" {
   horizontal_pod_autoscaling = false
   filestore_csi_driver       = false
   create_service_account     = true
+  #enable_private_endpoint       = true
   logging_service            = "logging.googleapis.com/kubernetes"
 
-  node_pools = [
-    {
-      name            = "node-pool"
-      machine_type    = "e2-standard-2"
-      node_locations  = "europe-west2-b,europe-west2-c"
-      min_count       = 2
-      max_count       = 5
-      disk_size_gb    = 30
-      spot            = false
-      auto_upgrade    = true
-      auto_repair     = true
-      autoscaling     = true
-      service_account = "gke-terraform-project@${var.project_id}.iam.gserviceaccount.com"
-    },
-  ]
+  node_pools = var.node_pools
 
 
   node_pools_oauth_scopes = {

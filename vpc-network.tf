@@ -25,3 +25,13 @@ module "gcp-network" {
     ]
   }
 }
+
+module "cloud-nat" {
+  source        = "terraform-google-modules/cloud-nat/google"
+  version       = "~> 4.0"
+  project_id    = var.project_id
+  region        = var.region
+  router        = "safer-router"
+  network       = module.gcp-network.network_self_link
+  create_router = true
+}

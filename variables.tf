@@ -10,10 +10,23 @@ variable "region" {
   description = "The region to host the cluster in"
   default     = ""
 }
+
+variable "node_pools" {
+  type = list(map(string))
+
+}
+
+
 variable "env_name" {
   type        = string
   description = "The environment for the GKE cluster"
   default     = "dev"
+}
+
+variable "bastion_members" {
+  type        = list(string)
+  description = "List of users, groups, SAs who need access to the bastion host"
+  default     = []
 }
 
 ### Cluster variables
@@ -42,6 +55,8 @@ variable "ip_range_services_name" {
   description = "The secondary ip range to use for services"
   default     = "ip-range-services"
 }
+
+
 variable "zones" {
   type        = list(string)
   description = "The project ID to host the cluster in"
